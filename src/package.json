@@ -1,0 +1,26 @@
+{
+	"name": "vue-component-loader",
+	"version": "1.0.0",
+	"description": "Autoload components for vue without a vuefile. Based on conventions",
+
+	"author": "Bastiaan Stroosnijder <bas@strootje.com>",
+	"contributors": [
+		{
+			"name": "Bastiaan Stroosnijder",
+			"email": "bas@strootje.com"
+		}
+	],
+
+	"main": "./lib/component-loader.js",
+
+	"scripts": {
+	},
+
+	"engines": {
+		"node": "*"
+	},
+
+	"dependencies": {
+		"vue-loader": "*"
+	}
+}
