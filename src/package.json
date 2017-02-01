@@ -1,6 +1,6 @@
 {
 	"name": "vue-component-loader",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Autoload components for vue without a vuefile. Based on conventions",
 	"license": "MPL-2.0",
 
