@@ -1,42 +1,48 @@
 # Vue Component Loader
 [mpl2]: https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2)
-[loader]: https://github.com/strootje/vue-component-loader
-[resolver]: https://github.com/strootje/vue-component-resolver-plugin
-
-* [*vue-component-loader*][loader]
-* [vue-component-resolver-plugin][resolver]
+[travis]: http://trafis-ci.org
+[coveralls]: http://coveralls.io
+[loaderutils]: https://www.npmjs.com/package/loader-utils
+[vueloader]: https://www.npmjs.com/package/vue-loader
+[vuetemplateloader]: https://www.npmjs.com/package/vue-template-loader
 
 ## Dependencies
-* [vue-component-resolver-plugin][resolver]
+* [loader-utils][loaderutils]
+* [vue-loader][vueloader]
+* [vue-template-loader][vuetemplateloader]
 
 ## Example use
 webpack.config.js:
-
-	import ComponentResolverPlugin from 'vue-component-resolver-plugin';
 
 	module.exports = {
 
 		// ...
 
-		resolveLoader: {
+		module: {
+			rules: [
 
-			// ...
+				// ...
 
-			alias: {
-				load: 'vue-component-loader'
-			}
-		},
+				{
+					test: /\.html$/,
+					use: [
+						{
+							loader: 'vue-component-loader',
+							options: {
+								view: { dir: '/path/to/views', ext: 'html' },
+								script: { dir: '/path/to/scripts', ext: 'js' },
+								style: { dir: '/path/to/styles', ext: 'css' }
+							}
+						}
+					]
+				}
 
-		plugins: [
+				// ...
+			]
+		}
 
-			// ...
+		// ...
 
-			new ComponentResolverPlugin({
-				views: { dir: dir.app('views'), ext: 'pug' },
-				scripts: { dir: dir.app('scripts'), ext: 'js' },
-				styles: { dir: dir.app('styles'), ext: 'less' }
-			})
-		]
 	};
 
 ## Installation

@@ -1,0 +1,64 @@
+{
+	"private": false,
+	"name": "vue-component-loader",
+	"version": "1.1.0",
+	"description": "dynamically load vue-components based on conventions",
+	"license": "MPL-2.0",
+
+	"author": "Bastiaan Stroosnijder <bas@strootje.com>",
+	"contributors": [
+		{
+			"name": "Bastiaan Stroosnijder",
+			"email": "bas@strootje.com"
+		}
+	],
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/strootje/vue-component-loader"
+	},
+
+	"main": "./dist/loader.js",
+
+	"scripts": {
+		"clean": "rimraf ./dist",
+
+		"lint": "run-p lint:scripts",
+		"lint:scripts": "eslint ./src",
+
+		"prebuild": "run-p clean lint",
+		"+build": "webpack --colors --config ./webpack.config.babel.js",
+		"build": "run-p +build",
+
+		"pretest": "run-p build",
+		"+test": "cucumber.js --compiler es6:babel-core/register -r ./specs/steps ./specs/features",
+		"test": "run-p +test",
+		"coverage": "nyc npm run +test && nyc report --reporter=text-lcov | coveralls",
+
+		"prepublish": "run-p build"
+	},
+
+	"engines": {
+		"node": "^6"
+	},
+
+	"dependencies": {
+		"loader-utils": "^1.1.0",
+		"vue-loader": "^11.1.0",
+		"vue-template-loader": "^0.2.0"
+	},
+
+	"devDependencies": {
+		"coveralls": "*",
+		"cucumber": "^2.0.0-rc.9",
+		"eslint": "*",
+		"npm-run-all": "*",
+		"nyc": "*",
+		"rimraf": "*",
+
+		"babel-cli": "*",
+		"babel-preset-latest": "*",
+
+		"webpack": "*"
+	}
+}
