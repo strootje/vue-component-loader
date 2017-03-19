@@ -1,10 +1,13 @@
 # Vue Component Loader
 [mpl2]: https://tldrlegal.com/license/mozilla-public-license-2.0-(mpl-2)
-[travis]: http://trafis-ci.org
-[coveralls]: http://coveralls.io
+[travis]: https://travis-ci.org/strootje/vue-component-loader
+[coveralls]: https://coveralls.io/github/strootje/vue-component-loader?branch=master
 [loaderutils]: https://www.npmjs.com/package/loader-utils
 [vueloader]: https://www.npmjs.com/package/vue-loader
 [vuetemplateloader]: https://www.npmjs.com/package/vue-template-loader
+
+[![Build Status](https://travis-ci.org/strootje/vue-component-loader.svg?branch=master)][travis]
+[![Coverage Status](https://coveralls.io/repos/github/strootje/vue-component-loader/badge.svg?branch=master)][coveralls]
 
 ## Dependencies
 * [loader-utils][loaderutils]
