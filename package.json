@@ -1,7 +1,7 @@
 {
 	"private": false,
 	"name": "vue-component-loader",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"description": "dynamically load vue-components based on conventions",
 	"license": "MPL-2.0",
 
