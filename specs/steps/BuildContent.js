@@ -44,19 +44,19 @@ defineSupportCode(({ Given, When, Then }) => {
 	});
 
 	Then(/the content contains a template tag/, ( callback ) => {
-		should(result).finally.match(/\<template src="\.\/home\.html" lang="html" \/\>/g).then(result => {
+		should(result).finally.match(/\<template src="\.\/home\.html" lang="html" \/\>/g).then(() => {
 			callback();
 		}, err => { callback(err); });
 	});
 
 	Then(/the content contains a script tag/, ( callback ) => {
-		should(result).finally.match(/\<script src="\.\/home\.js" lang="js" \/\>/g).then(result => {
+		should(result).finally.match(/\<script src="\.\/home\.js" lang="js" \/\>/g).then(() => {
 			callback();
 		}, err => { callback(err); });
 	});
 
 	Then(/the content contains a style tag/, ( callback ) => {
-		should(result).finally.match(/\<style src="\.\/home\.css" lang="css" \/\>/g).then(result => {
+		should(result).finally.match(/\<style src="\.\/home\.css" lang="css" \/\>/g).then(() => {
 			callback();
 		}, err => { callback(err); });
 	});
