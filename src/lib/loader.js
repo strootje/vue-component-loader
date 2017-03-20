@@ -1,23 +1,7 @@
-import { existsSync } from 'fs';
-import { join } from 'path';
 import LoaderUtils from 'loader-utils';
 import VueLoader from 'vue-loader';
 import Builder from './builder';
-
-const resolve = ( option, basepath ) => {
-	const paths = [
-		join(option.dir, basepath+'.'+option.ext),
-		join(option.dir, basepath, 'index'+'.'+option.ext)
-	];
-
-	for (var path of paths) {
-		if (existsSync(path)) {
-			return path;
-		}
-	}
-
-	return null;
-};
+import Resolver from './resolver';
 
 export default function() {
 	const request = this.request;
@@ -27,13 +11,12 @@ export default function() {
 	const viewfile = groups[1];
 	const basepath = viewfile.replace(options.view.dir, '').replace('index.'+options.view.ext, '');
 
-	const resources = {
-		script: resolve(options.script, basepath),
-		style: resolve(options.style, basepath)
-	};
+	const resources = {};
+	Resolver(options.script, basepath).then(result => resources.script = result);
+	Resolver(options.style, basepath).then(result => resources.style = result);
 
-	// return build(this, options, viewfile, resources);
-	return Builder(options, viewfile, resources).then(content => {
-		return VueLoader.apply(this, [ content ]);
-	});
+	return Builder(options, viewfile, resources).then(
+		content => { return VueLoader.apply(this, [ content ]); },
+		err => { return err; }
+	);
 }
