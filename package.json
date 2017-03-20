@@ -24,14 +24,14 @@
 		"clean": "rimraf ./dist",
 
 		"lint": "run-p lint:scripts",
-		"lint:scripts": "eslint ./src",
+		"lint:scripts": "eslint ./",
 
 		"prebuild": "run-p clean lint",
 		"+build": "webpack --colors --config ./webpack.config.babel.js",
 		"build": "run-p +build",
 
 		"pretest": "run-p build",
-		"+test": "cucumber.js --compiler es6:babel-core/register -r ./specs/steps ./specs/features",
+		"+test": "cucumber.js --compiler es6:babel-core/register --tags '@build and not @ignore' -r ./specs/steps ./specs/features",
 		"test": "run-p +test",
 		"coverage": "nyc npm run +test && nyc report --reporter=text-lcov | coveralls",
 
@@ -55,6 +55,7 @@
 		"npm-run-all": "*",
 		"nyc": "*",
 		"rimraf": "*",
+		"should": "*",
 
 		"babel-cli": "*",
 		"babel-preset-latest": "*",

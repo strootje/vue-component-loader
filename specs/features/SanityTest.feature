@@ -1,3 +1,4 @@
+@build
 Feature: This is a sanity test
 
 	Scenario: One plus one should equal two

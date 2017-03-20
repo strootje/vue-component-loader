@@ -2,6 +2,7 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 import LoaderUtils from 'loader-utils';
 import VueLoader from 'vue-loader';
+import Builder from './builder';
 
 const resolve = ( option, basepath ) => {
 	const paths = [
@@ -18,22 +19,6 @@ const resolve = ( option, basepath ) => {
 	return null;
 };
 
-const build = ( self, options, viewfile, resources ) => {
-	const content = [
-		'<template src="'+viewfile+'" lang="'+options.view.ext+'" />'
-	];
-
-	if (resources.script) {
-		content.push('<script src="'+resources.script+'" lang="'+options.script.ext+'" />');
-	}
-
-	if (resources.style) {
-		content.push('<style src="'+resources.style+'" lang="'+options.style.ext+'" />');
-	}
-
-	return VueLoader.apply(self, [ content.join('\n') ]);
-};
-
 export default function() {
 	const request = this.request;
 	const options = LoaderUtils.getOptions(this) || {};
@@ -47,5 +32,8 @@ export default function() {
 		style: resolve(options.style, basepath)
 	};
 
-	return build(this, options, viewfile, resources);
+	// return build(this, options, viewfile, resources);
+	return Builder(options, viewfile, resources).then(content => {
+		return VueLoader.apply(this, [ content ]);
+	});
 }
